@@ -1,0 +1,15 @@
+html, body {
+  height: 100%;
+}
+
+canvas {
+  border: 1px solid black;
+}
+
+input.color-input {
+  width: 50px;
+} 
+
+#texture {
+  border: 1px solid black;
+}
