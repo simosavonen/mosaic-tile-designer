@@ -6,13 +6,41 @@ input.color-input {
   width: 50px;
 } 
 
+.groutsample {
+  float: left;
+  padding: 4px;
+  margin: 0px;
+  width: 17px;
+  height: 20px;
+  border: 2px solid rgb(255, 255, 255);
+}
+.groutsample:hover {
+  border: 2px solid black;
+}
+
 #mosaic {
   float: left;
   margin: 0px 20px 20px 0px;
 }
 
+#mosaicSettings.input {
+  width: 20px;
+}
+
 #controls {
   float: left;
+}
+
+#groutDiv {
+  float: left;
+  width: 400px;
+  border: 1px solid black;
+  padding: 10px;
+}
+
+#groutHeader {
+  clear: both;
+  margin-bottom: 3px;
 }
 
 #texture {

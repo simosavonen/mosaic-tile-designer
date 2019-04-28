@@ -5,26 +5,54 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="/css/huebee.min.css" media="screen">
   <link rel="stylesheet" href="/css/styles.css">
   <title>Mosaic Tile Designer</title>
 </head>
 
 <body>
   <h2>Mosaic Tile Designer</h2>
-  <canvas id="mosaic"></canvas>
   <div id="controls">
-    color #1 <input id="color1" class="color-input" value="#F80" />
-    <div>
-      Grout color <select id="grout"></select>
+    <div id="groutDiv">
+      <div id="groutHeader"></div>
+    </div>
+    <div id="mosaicSettings">
+      <table>
+        <tbody>
+          <tr>
+            <td>rows</td>
+            <td id="rowsValue"></td>
+            <td><input name="rows" id="rows" type="range" min="1" max="20" onInput="setRows(this.value)" /></td>
+          </tr>
+          <tr>
+            <td>cols</td>
+            <td id="colsValue"></td>
+            <td><input name="cols" id="cols" type="range" min="1" max="20" onInput="setCols(this.value)" /></td>
+          </tr>
+          <tr>
+            <td>grout</td>
+            <td id="groutValue"></td>
+            <td><input name="grout" id="grout" type="range" min="2" max="20" step="2" onInput="setGrout(this.value)" /></td>
+          </tr>
+          <tr>
+            <td>width</td>
+            <td id="widthValue"></td>
+            <td><input name="width" id="width" type="range" min="1" max="100" onInput="setWidth(this.value)" /></td>
+          </tr>
+          <tr>
+            <td>height</td>
+            <td id="heightValue"></td>
+            <td><input name="height" id="height" type="range" min="1" max="100" onInput="setHeight(this.value)" /></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
+  <canvas id="mosaic"></canvas>
   <div id="texture"></div>
   <div id="footer">
     Mosaic Tile Designer - &copy; Simo Savonen 2019
   </div>
 
-  <script src="/js/huebee.pkgd.min.js"></script>
   <script src="/js/app.js"></script>
 </body>
 

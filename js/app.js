@@ -1,11 +1,10 @@
 'use strict'
 
-const grout = 6 // use even numbers
-let groutColor = '#FFFFFF'
-const width = 20
-const height = 20
-const rows = 10
-const cols = 10
+let grout = 8 // use even numbers
+let width = 20
+let height = 20
+let rows = 15
+let cols = 10
 const swatch = ['#F80', '#FF0', '#8F0']
 const mapeiGrouts = {
   "100 White": "#FFFFFF",
@@ -41,45 +40,109 @@ const mapeiGrouts = {
   "172 Space Blue": "#295898",
   "174 Tornado": "#56615F"
 }
+let groutColor = mapeiGrouts['100 White']
+let groutName = '100 White'
 
-const randomMatrix = (rows, cols, swatchSize) => {
-  const matrix = new Array(cols)
-  for (let i = 0; i < cols; i++) {
-    matrix[i] = new Array(rows).fill().map(
-      () => Math.floor(Math.random() * swatchSize)
-    )
+document.getElementById('grout').value = grout
+document.getElementById('rows').value = rows
+document.getElementById('cols').value = cols
+document.getElementById('width').value = width
+document.getElementById('height').value = height
+
+const updateSettings = () => {
+  document.getElementById('groutValue').innerText = grout
+  document.getElementById('rowsValue').innerText = rows
+  document.getElementById('colsValue').innerText = cols
+  document.getElementById('widthValue').innerText = width
+  document.getElementById('heightValue').innerText = height
+}
+updateSettings()
+
+// call this if number of colors in the swatch changes,
+// it erases current pattern as a side-effect
+const randomMatrix = (swatchSize) => {
+  let grid = [20]
+  for (let i = 0; i < 20; i++) {
+    grid[i] = [20]
+    for (let j = 0; j < 20; j++) {
+      grid[i][j] = Math.floor(Math.random() * swatchSize)
+    }
   }
-  return matrix
+  return grid
 }
 
-const matrix = randomMatrix(rows, cols, swatch.length)
+let matrix = randomMatrix(swatch.length)
+
+const setRows = (value) => {
+  rows = parseInt(value, 10)
+  updateCanvas()
+  updateSettings()
+  draw()
+}
+
+const setCols = (value) => {
+  cols = parseInt(value, 10)
+  updateCanvas()
+  updateSettings()
+  draw()
+}
+
+const setGrout = (value) => {
+  grout = parseInt(value, 10)
+  updateCanvas()
+  updateSettings()
+  draw()
+}
+
+const setWidth = (value) => {
+  width = parseInt(value, 10)
+  updateCanvas()
+  updateSettings()
+  draw()
+}
+
+const setHeight = (value) => {
+  height = parseInt(value, 10)
+  updateCanvas()
+  updateSettings()
+  draw()
+}
+
 
 const canvas = document.getElementById('mosaic')
-canvas.width = cols * (width + grout)
-canvas.height = rows * (height + grout)
 const ctx = canvas.getContext('2d')
 
-const select = document.getElementById('grout')
-for (let name in mapeiGrouts) {
-  select.options[select.options.length] = new Option(name, mapeiGrouts[name])
+const updateCanvas = () => {
+  canvas.width = cols * (width + grout)
+  canvas.height = rows * (height + grout)
 }
+updateCanvas()
 
-select.addEventListener('change', () => {
-  groutColor = select.value
-  draw()
-  updateTextureView()
-})
+const groutDiv = document.getElementById('groutDiv')
+const groutHeader = document.getElementById('groutHeader')
+for (let name in mapeiGrouts) {
+  const node = document.createElement('div')
+  node.className = 'groutsample'
+  node.style.background = mapeiGrouts[name]
+  node.addEventListener('click', () => {
+    groutColor = mapeiGrouts[name]
+    groutName = name
+    groutHeader.textContent = `Grout: ${groutName}: ${groutColor} - Mapei Ultracolor`
+    draw()
+  })
+  groutDiv.appendChild(node)
+}
+groutHeader.textContent = `Grout: ${groutName}: ${groutColor} - Mapei Ultracolor`
+
 
 canvas.addEventListener('click', (event) => {
   const mousePos = getMousePos(canvas, event)
   swapColor(mousePos)
   draw()
-  updateTextureView()
 })
 
 window.addEventListener('load', () => {
   draw()
-  updateTextureView()
 })
 
 const getMousePos = (canvas, event) => {
@@ -109,19 +172,11 @@ const updateTextureView = () => {
   textureDiv.style.height = `${canvas.height * 3}px`
 }
 
-
-
-const elems = document.querySelectorAll('.color-input');
-for (let i = 0; i < elems.length; i++) {
-  const elem = elems[i];
-  const hueb = new Huebee(elem, {
-    // options
-  });
-}
-
 const draw = () => {
+
   ctx.fillStyle = groutColor
   ctx.fillRect(0, 0, canvas.width, canvas.height)
+
   for (let x = 0; x < cols; x++) {
     for (let y = 0; y < rows; y++) {
       ctx.fillStyle = swatch[matrix[x][y]]
@@ -133,6 +188,8 @@ const draw = () => {
       )
     }
   }
+
+  updateTextureView()
 }
 
 
