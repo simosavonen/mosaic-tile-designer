@@ -5,8 +5,10 @@ let width = 20
 let height = 20
 let rows = 10
 let cols = 10
-let swatch = ['#000000', '#333333', '#666666', '#999999']
+const maxTiles = 30 // limit GUI sliders to this
+let swatch = ['#222e50', '#007991', '#439a86', '#bcd8c1', '#e9d985']
 let drawGlowEffect = true
+let patternLocked = false
 
 // from mapeiData.js
 let groutName = '114 Anthracite'
@@ -20,21 +22,21 @@ document.getElementById('width').value = width
 document.getElementById('height').value = height
 
 const updateSettings = () => {
-  document.getElementById('groutValue').innerText = grout
+  document.getElementById('groutValue').innerText = grout + 'px'
   document.getElementById('rowsValue').innerText = rows
   document.getElementById('colsValue').innerText = cols
-  document.getElementById('widthValue').innerText = width
-  document.getElementById('heightValue').innerText = height
+  document.getElementById('widthValue').innerText = width + 'px'
+  document.getElementById('heightValue').innerText = height + 'px'
 }
 
 
 // call this if number of colors in the swatch changes,
 // it erases current pattern as a side-effect
 const randomMatrix = (swatchSize) => {
-  let grid = [20]
-  for (let i = 0; i < 20; i++) {
-    grid[i] = [20]
-    for (let j = 0; j < 20; j++) {
+  let grid = [maxTiles]
+  for (let i = 0; i < maxTiles; i++) {
+    grid[i] = [maxTiles]
+    for (let j = 0; j < maxTiles; j++) {
       grid[i][j] = Math.floor(Math.random() * swatchSize)
     }
   }
@@ -42,6 +44,32 @@ const randomMatrix = (swatchSize) => {
 }
 
 let matrix = randomMatrix(swatch.length)
+
+const theInputs = document.getElementById('theInputs')
+for (let i = 0; i < swatch.length; i++) {
+  const input = document.createElement('input')
+  input.type = 'color'
+  input.id = `color${i}`
+  input.className = 'colorInput'
+  input.value = swatch[i]
+  input.addEventListener('change', () => {
+    swatch[i] = input.value
+    input.labels[0].innerText = input.value
+    draw()
+  })
+
+  const label = document.createElement('label')
+  label.setAttribute('for', input.id)
+  label.innerText = input.value
+
+  const wrapper = document.createElement('div')
+  wrapper.appendChild(label)
+  wrapper.appendChild(input)
+  theInputs.appendChild(wrapper)
+}
+
+
+
 
 const canvas = document.getElementById('mosaic')
 const ctx = canvas.getContext('2d')
@@ -131,7 +159,7 @@ const draw = () => {
 
     }
   }
-  // the mosaic changed, lets update texture preview
+  // the mosaic changed, update texture preview
   updateTextureView()
 }
 
@@ -168,4 +196,71 @@ const setWidth = (value) => {
 const setHeight = (value) => {
   height = parseInt(value, 10)
   update()
+}
+
+const hideHelpText = () => {
+  document.getElementById('usermanual').style.display = 'none'
+}
+
+const toggleGlow = () => {
+  drawGlowEffect = !drawGlowEffect
+  document.getElementById('toggleStatus').innerHTML = drawGlowEffect ? 'on' : 'off'
+  draw()
+}
+
+const toggleLock = () => {
+  patternLocked = !patternLocked
+  document.getElementById('lockStatus').innerHTML = patternLocked ? 'on' : 'off'
+}
+
+// this somehow returns nicely formatted color codes, ex. #ffffff
+const randomColor = () => {
+  return '#' + Math.floor(Math.random() * 16777215).toString(16)
+}
+
+const setSwatch = (val) => {
+  switch (val) {
+    case 1:
+      swatch.push(randomColor())
+      const input = document.createElement('input')
+      input.type = 'color'
+      input.id = `color${swatch.length}`
+      input.className = 'colorInput'
+      input.value = swatch[swatch.length - 1]
+      input.addEventListener('change', () => {
+        swatch[swatch.length - 1] = input.value
+        input.labels[0].innerText = input.value
+        draw()
+      })
+      const label = document.createElement('label')
+      label.setAttribute('for', input.id)
+      label.innerText = input.value
+
+      const wrapper = document.createElement('div')
+      wrapper.appendChild(label)
+      wrapper.appendChild(input)
+      theInputs.appendChild(wrapper)
+
+      document.getElementById('subButton').disabled = false
+      if (!patternLocked) {
+        matrix = randomMatrix(swatch.length)
+        draw()
+      }
+      return null
+    case -1:
+      if (swatch.length > 1) {
+        swatch.pop()
+        theInputs.removeChild(theInputs.lastChild)
+        if (!patternLocked) {
+          matrix = randomMatrix(swatch.length)
+          draw()
+        }
+      }
+      if (swatch.length === 1) {
+        document.getElementById('subButton').disabled = true
+      }
+      return null
+    default:
+      return null
+  }
 }

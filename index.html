@@ -5,6 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta http-equiv='cache-control' content='no-cache'>
+  <meta http-equiv='expires' content='0'>
+  <meta http-equiv='pragma' content='no-cache'>
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link rel="stylesheet" href="/css/styles.css">
   <title>Mosaic Tile Designer</title>
 </head>
@@ -21,36 +25,64 @@
         <tbody>
           <tr>
             <td style="width: 50px;">rows</td>
-            <td id="rowsValue" style="width: 30px;"></td>
-            <td><input class="slider" name="rows" id="rows" type="range" min="1" max="20" onInput="setRows(this.value)" /></td>
+            <td id="rowsValue" style="width: 45px; text-align: center;"></td>
+            <td><input class="slider" name="rows" id="rows" type="range" min="1" max="30" onInput="setRows(this.value)" /></td>
           </tr>
           <tr>
             <td>cols</td>
-            <td id="colsValue"></td>
-            <td><input class="slider" name="cols" id="cols" type="range" min="1" max="20" onInput="setCols(this.value)" /></td>
+            <td id="colsValue" style="width: 45px; text-align: center;"></td>
+            <td><input class="slider" name="cols" id="cols" type="range" min="1" max="30" onInput="setCols(this.value)" /></td>
           </tr>
           <tr>
             <td>grout</td>
-            <td id="groutValue"></td>
+            <td id="groutValue" style="width: 45px; text-align: right;"></td>
             <td><input class="slider" name="grout" id="grout" type="range" min="2" max="20" step="2" onInput="setGrout(this.value)" /></td>
           </tr>
           <tr>
             <td>width</td>
-            <td id="widthValue"></td>
+            <td id="widthValue" style="width: 45px; text-align: right;"></td>
             <td><input class="slider" name="width" id="width" type="range" min="1" max="100" onInput="setWidth(this.value)" /></td>
           </tr>
           <tr>
             <td>height</td>
-            <td id="heightValue"></td>
-            <td><input class="slider" name="height" id="height" type="range" min="1" max="100" onInput="setHeight(this.value)" /></td>
+            <td id="heightValue" style="width: 45px; text-align: right;"></td>
+            <td>
+              <input class="slider" name="height" id="height" type="range" min="1" max="100" onInput="setHeight(this.value)" />
+            </td>
+          </tr>
+          <tr>
+            <td>glow</td>
+            <td id="toggleStatus" style="width: 45px; text-align: center;">on</td>
+            <td><button id="toggleButton" onClick="toggleGlow()">toggle glow</button></td>
+          </tr>
+          <tr>
+            <td>lock</td>
+            <td id="lockStatus" style="width: 45px; text-align: center;">off</td>
+            <td><button id="lockButton" onClick="toggleLock()">toggle pattern lock</button></td>
           </tr>
         </tbody>
       </table>
     </div>
+    <div id="colorSwatch">
+      Color swatch
+      <div id="theInputs"></div>
+      <button id="addButton" onClick="setSwatch(1)">+</button>
+      <button id="subButton" onClick="setSwatch(-1)">-</button>
+    </div>
   </div>
   <div id="rightSide">
     <canvas id="mosaic"></canvas>
-    <div id="texture"></div>
+    <div id="texture">
+      <div id="usermanual">
+        <p>This area shows a preview of the texture, laid out side by side.</p>
+        <p>To change the pattern, click at the tiles in the smaller window.</p>
+        <p>To <strong>save the texture</strong>, right click at the smaller window and choose 'Save image as...'.</p>
+        <p>Adding colors to the swatch will reset the mosaic pattern, unless you <strong>lock it</strong>.</p>
+        <p>Page refresh will erase all your work.</p>
+        <p>Works on Chrome and Firefox. Doesn't run on IE11. On Edge the color picker wont send events.</p>
+        <button onClick="hideHelpText()">hide this</button>
+      </div>
+    </div>
   </div>
   <div id="footer">
     Mosaic Tile Designer - &copy; Simo Savonen 2019

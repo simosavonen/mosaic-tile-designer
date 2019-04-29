@@ -1,3 +1,7 @@
+html, body {
+  font-family: 'Roboto', sans-serif;
+}
+
 canvas {
   border: 1px solid black;
   float: left;
@@ -14,14 +18,41 @@ input.color-input {
   margin: 0px;
   width: 20px;
   height: 20px;
-  border: 2px solid rgb(255, 255, 255);
+  border: 2px solid #F5FFFA;
 }
 .groutsample:hover {
   border: 2px solid black;
 }
 
 .slider {
+  width: 180px;
+  margin-left: 10px;
+}
+
+#theInputs {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex; 
+  flex-wrap: wrap; 
+  justify-content: flex-end;
+}
+
+.colorInput {
   width: 200px;
+  margin-left: 15px;
+  padding: 0px;  
+}
+
+#colorSwatch button {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 10px 5px 0px 0px;
+  width: 50px;
+  padding: 0px;
+}
+
+#mosaicSettings button {
+  margin-left: 10px;
 }
 
 #mosaic {
@@ -29,10 +60,13 @@ input.color-input {
   margin: 0px 20px 20px 0px;
 }
 
-#mosaicSettings {
+#mosaicSettings, #colorSwatch, #groutDiv {
+  width: 300px;
   padding: 10px;
   margin: 0px 10px 10px 0px;
   border: 1px solid black;
+  background: #F5FFFA;
+  overflow: auto;
 }
 
 #leftSide {
@@ -46,15 +80,6 @@ input.color-input {
   float: left;
 }
 
-#groutDiv {
-  width: 300px;
-  height: auto;
-  overflow: auto;
-  border: 1px solid black;
-  padding: 10px;
-  margin: 0px 10px 10px 0px;
-}
-
 #groutHeader {
   clear: both;
   margin-bottom: 10px;
@@ -62,7 +87,16 @@ input.color-input {
 
 #texture {  
   float: left;
-  border: 1px solid black;  
+  border: 1px solid black;
+  overflow: auto;  
+}
+
+#usermanual {
+  background: rgba(245,255,250,0.8);
+  padding: 10px;
+  margin: 10px;
+  min-width: 300px;
+  max-width: 400px;
 }
 
 #footer {
