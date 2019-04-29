@@ -1,47 +1,17 @@
 'use strict'
 
-let grout = 8 // use even numbers
+let grout = 4 // use even numbers
 let width = 20
 let height = 20
-let rows = 15
+let rows = 10
 let cols = 10
-const swatch = ['#F80', '#FF0', '#8F0']
-const mapeiGrouts = {
-  "100 White": "#FFFFFF",
-  "103 Moon white": "#E0E4DD",
-  "110 Manhattan 2000": "#CDC9CE",
-  "111 Silver Grey": "#ECEEEF",
-  "112 Medium Grey": "#97979B",
-  "113 Cement Grey": "#817F7B",
-  "114 Anthracite": "#494C53",
-  "115 River Grey": "#AFAD9C",
-  "116 Musk Grey": "#989D8D",
-  "120 Black": "#000000",
-  "130 Jasmine": "#F6ECD9",
-  "131 Vanilla": "#FCE9D1",
-  "132 Beige 2000": "#E8D4B8",
-  "133 Sand": "#B1A18D",
-  "134 Silk": "#8B7B6B",
-  "135 Golden Dust": "#9A7A5D",
-  "136 Mud": "#70615A",
-  "137 Caribbean": "#CDCAB9",
-  "138 Almond": "#DCC2AA",
-  "141 Caramel": "#E4A366",
-  "142 Brown": "#95695C",
-  "143 Terracotta": "#72463B",
-  "144 Chocolate": "#653E3D",
-  "145 Terra di Siena": "#BA4C34",
-  "149 Volcano sand": "#494644",
-  "150 Yellow": "#F3C968",
-  "152 Liquorice": "#906A55",
-  "162 Violet": "#9F85AF",
-  "170 Crocus Blue": "#BAC8DE",
-  "171 Turquoise": "#127A85",
-  "172 Space Blue": "#295898",
-  "174 Tornado": "#56615F"
-}
-let groutColor = mapeiGrouts['100 White']
-let groutName = '100 White'
+let swatch = ['#000000', '#333333', '#666666', '#999999']
+let drawGlowEffect = true
+
+// from mapeiData.js
+let groutName = '114 Anthracite'
+let groutColor = mapeiGrouts[groutName]
+
 
 document.getElementById('grout').value = grout
 document.getElementById('rows').value = rows
@@ -56,7 +26,7 @@ const updateSettings = () => {
   document.getElementById('widthValue').innerText = width
   document.getElementById('heightValue').innerText = height
 }
-updateSettings()
+
 
 // call this if number of colors in the swatch changes,
 // it erases current pattern as a side-effect
@@ -73,42 +43,6 @@ const randomMatrix = (swatchSize) => {
 
 let matrix = randomMatrix(swatch.length)
 
-const setRows = (value) => {
-  rows = parseInt(value, 10)
-  updateCanvas()
-  updateSettings()
-  draw()
-}
-
-const setCols = (value) => {
-  cols = parseInt(value, 10)
-  updateCanvas()
-  updateSettings()
-  draw()
-}
-
-const setGrout = (value) => {
-  grout = parseInt(value, 10)
-  updateCanvas()
-  updateSettings()
-  draw()
-}
-
-const setWidth = (value) => {
-  width = parseInt(value, 10)
-  updateCanvas()
-  updateSettings()
-  draw()
-}
-
-const setHeight = (value) => {
-  height = parseInt(value, 10)
-  updateCanvas()
-  updateSettings()
-  draw()
-}
-
-
 const canvas = document.getElementById('mosaic')
 const ctx = canvas.getContext('2d')
 
@@ -116,7 +50,7 @@ const updateCanvas = () => {
   canvas.width = cols * (width + grout)
   canvas.height = rows * (height + grout)
 }
-updateCanvas()
+
 
 const groutDiv = document.getElementById('groutDiv')
 const groutHeader = document.getElementById('groutHeader')
@@ -127,21 +61,17 @@ for (let name in mapeiGrouts) {
   node.addEventListener('click', () => {
     groutColor = mapeiGrouts[name]
     groutName = name
-    groutHeader.textContent = `Grout: ${groutName}: ${groutColor} - Mapei Ultracolor`
+    groutHeader.textContent = `${groutName}: ${groutColor}`
     draw()
   })
   groutDiv.appendChild(node)
 }
-groutHeader.textContent = `Grout: ${groutName}: ${groutColor} - Mapei Ultracolor`
+groutHeader.textContent = `${groutName}: ${groutColor}`
 
 
 canvas.addEventListener('click', (event) => {
   const mousePos = getMousePos(canvas, event)
   swapColor(mousePos)
-  draw()
-})
-
-window.addEventListener('load', () => {
   draw()
 })
 
@@ -173,24 +103,69 @@ const updateTextureView = () => {
 }
 
 const draw = () => {
-
   ctx.fillStyle = groutColor
   ctx.fillRect(0, 0, canvas.width, canvas.height)
 
   for (let x = 0; x < cols; x++) {
     for (let y = 0; y < rows; y++) {
+
+      const tileX = x * (width + grout) + grout / 2
+      const tileY = y * (height + grout) + grout / 2
+
       ctx.fillStyle = swatch[matrix[x][y]]
-      ctx.fillRect(
-        x * (width + grout) + grout / 2,
-        y * (height + grout) + grout / 2,
-        width,
-        height
-      )
+      ctx.fillRect(tileX, tileY, width, height)
+
+      if (drawGlowEffect) {
+        const leftgrd = ctx.createLinearGradient(tileX, tileY, tileX + width / 5, tileY)
+        leftgrd.addColorStop(0, 'rgba(255, 255, 255, 0.2)')
+        leftgrd.addColorStop(1, 'rgba(255, 255, 255, 0)')
+        ctx.fillStyle = leftgrd
+        ctx.fillRect(tileX, tileY, width / 5, height)
+
+        const topgrd = ctx.createLinearGradient(tileX, tileY, tileX, tileY + height / 5)
+        topgrd.addColorStop(0, 'rgba(255, 255, 255, 0.2)')
+        topgrd.addColorStop(1, 'rgba(255, 255, 255, 0)')
+        ctx.fillStyle = topgrd
+        ctx.fillRect(tileX, tileY, width, height / 5)
+      }
+
     }
   }
-
+  // the mosaic changed, lets update texture preview
   updateTextureView()
 }
 
+const update = () => {
+  updateCanvas()
+  updateSettings()
+  draw()
+}
 
+window.addEventListener('load', () => {
+  update()
+})
 
+const setRows = (value) => {
+  rows = parseInt(value, 10)
+  update()
+}
+
+const setCols = (value) => {
+  cols = parseInt(value, 10)
+  update()
+}
+
+const setGrout = (value) => {
+  grout = parseInt(value, 10)
+  update()
+}
+
+const setWidth = (value) => {
+  width = parseInt(value, 10)
+  update()
+}
+
+const setHeight = (value) => {
+  height = parseInt(value, 10)
+  update()
+}
