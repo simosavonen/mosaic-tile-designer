@@ -1,0 +1,15 @@
+aside {
+  width: 400px;
+  float: left;
+  background: green;
+}
+
+main {
+  width: 800px;
+  float: left;
+}
+
+footer {
+  float: left;
+  clear: both;
+}
