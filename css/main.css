@@ -1,15 +1,41 @@
 aside {
-  width: 400px;
+  width: 300px;
   float: left;
-  background: green;
+  margin: 10px 10px 10px 0px;
 }
 
 main {
   width: 800px;
   float: left;
+  background: green;
+  margin: 10px 0px 10px 0px;
 }
 
 footer {
   float: left;
   clear: both;
+}
+
+.groutPalette, .settings, .colorSwatch {
+  border: 1px solid black;
+  padding: 10px;
+  margin: 0px 0px 10px 0px;
+  overflow: auto;
+}
+
+.groutSample {
+  width: 15px;
+  height: 30px;
+  margin: 1px;
+  float: left;
+  border: 3px solid rgba(255,255,255,0);
+}
+
+.groutSample:hover {
+  border: 3px solid black;
+}
+
+.groutHeader {
+  display: block;
+  margin-bottom: 10px;
 }
