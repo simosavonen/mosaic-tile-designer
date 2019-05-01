@@ -1,23 +1,32 @@
+body {
+  background-image: url('/img/white_mosaic.png')
+}
+
+.container {
+  width: 1200px;
+  overflow: auto;
+  margin-top: 20px;
+}
+
 aside {
   width: 300px;
-  float: left;
-  margin: 10px 10px 10px 0px;
+  float: left;  
+  margin: 0px 10px 0px 0px;
 }
 
 main {
-  width: 800px;
+  width: 800px; 
   float: left;
-  background: green;
-  margin: 10px 0px 10px 0px;
+  overflow: auto;
 }
 
 footer {
-  float: left;
-  clear: both;
+  padding: 10px;
 }
 
-.groutPalette, .settings, .colorSwatch {
+.groutPalette, .settings, .colorSwatch, .favorites {
   border: 1px solid black;
+  background: rgba(240, 240, 240, 0.6);
   padding: 10px;
   margin: 0px 0px 10px 0px;
   overflow: auto;
@@ -38,4 +47,8 @@ footer {
 .groutHeader {
   display: block;
   margin-bottom: 10px;
+}
+
+.mosaic, .texture {
+  border: 1px solid black;
 }

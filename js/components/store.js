@@ -12,9 +12,17 @@ const defaults = {
 
 class Store {
   constructor() {
+    this.state = JSON.parse(localStorage.getItem('state'))
     this.swatch = JSON.parse(localStorage.getItem('swatch'))
     this.matrix = JSON.parse(localStorage.getItem('matrix'))
-    this.state = JSON.parse(localStorage.getItem('state'))
+    this.favorites = JSON.parse(localStorage.getItem('favorites'))
+
+    this.observers = []
+
+    if (!this.state) {
+      this.state = defaults
+      localStorage.setItem('state', JSON.stringify(this.state))
+    }
 
     if (!this.swatch) {
       this.swatch = ['#222e50', '#007991', '#439a86', '#bcd8c1', '#e9d985']
@@ -28,10 +36,10 @@ class Store {
       this.randomizeMatrix()
     }
 
-    if (!this.state) {
-      this.state = defaults
-      localStorage.setItem('state', JSON.stringify(this.state))
+    if (!this.favorites) {
+      this.favorites = []
     }
+
   }
 
   // Fills the matrix with random swatch[] indexes
@@ -44,21 +52,57 @@ class Store {
       }
     }
     localStorage.setItem('matrix', JSON.stringify(this.matrix))
+    this.notify()
   }
 
   swapColor(x, y) {
     let index = this.matrix[x][y]
     this.matrix[x][y] = (index < this.swatch.length) ? index++ : 0
     localStorage.setItem('matrix', JSON.stringify(this.matrix))
+    this.notify()
   }
 
-  setState(key, val) {
+  addColor(color) {
+    this.swatch.push(color)
+    localStorage.setItem('swatch', JSON.stringify(this.swatch))
+    if (!this.state.patternLock) {
+      this.randomizeMatrix()
+    }
+  }
+
+  removeColor() {
+    if (this.swatch.length > 1) {
+      this.swatch.pop()
+      localStorage.setItem('swatch', JSON.stringify(this.swatch))
+    }
+    if (!this.state.patternLock) {
+      this.randomizeMatrix()
+    }
+  }
+
+  saveToFavorites() {
+    this.favorites.push(this.swatch)
+    localStorage.setItem('favorites', JSON.stringify(this.favorites))
+  }
+
+  loadFromFavorites(index) {
+    this.swatch = favorites[index]
+    localStorage.setItem('swatch', JSON.stringify(this.swatch))
+    this.nofify()
+  }
+
+  setState(key, val, shouldNotify = true) {
     this.state[key] = val
     localStorage.setItem('state', JSON.stringify(this.state))
+    shouldNotify ? this.notify() : null
   }
 
-  getState(key) {
-    return this.state[key]
+  addObserver(observer) {
+    this.observers.push(observer)
+  }
+
+  notify() {
+    this.observers.forEach((observer) => observer.update())
   }
 }
 
