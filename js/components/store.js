@@ -30,7 +30,7 @@ class Store {
     }
 
     if (!this.matrix) {
-      // Populates a 30x30 array with zeros.
+      // populates a 30x30 array with zeros
       // ES6 Array.from(object, mapFunction)
       this.matrix = Array.from({ length: 30 }, () => Array.from({ length: 30 }, () => 0))
       this.randomizeMatrix()
@@ -42,13 +42,12 @@ class Store {
 
   }
 
-  // Fills the matrix with random swatch[] indexes
+  // fills the matrix with random swatch[] indexes
   randomizeMatrix() {
     for (let x = 0; x < this.matrix.length; x++) {
       for (let y = 0; y < this.matrix[0].length; y++) {
         const max = this.swatch.length
-        const swatchIndex = Math.floor(Math.random() * max)
-        this.matrix[x][y] = swatchIndex
+        this.matrix[x][y] = Math.floor(Math.random() * max)
       }
     }
     localStorage.setItem('matrix', JSON.stringify(this.matrix))
@@ -62,7 +61,13 @@ class Store {
     this.notify()
   }
 
-  addColor(color) {
+  setColorInSwatch(color, index) {
+    this.swatch[index] = color
+    localStorage.setItem('swatch', JSON.stringify(this.swatch))
+    this.notify()
+  }
+
+  addColorToSwatch(color) {
     this.swatch.push(color)
     localStorage.setItem('swatch', JSON.stringify(this.swatch))
     if (!this.state.patternLock) {
@@ -70,13 +75,13 @@ class Store {
     }
   }
 
-  removeColor() {
+  removeColorFromSwatch() {
     if (this.swatch.length > 1) {
       this.swatch.pop()
       localStorage.setItem('swatch', JSON.stringify(this.swatch))
-    }
-    if (!this.state.patternLock) {
-      this.randomizeMatrix()
+      if (!this.state.patternLock) {
+        this.randomizeMatrix()
+      }
     }
   }
 

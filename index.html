@@ -7,7 +7,9 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Mosaic Tile Designer</title>
 
+  <link rel="stylesheet" href="css/huebee.min.css" media="screen">
   <link rel="stylesheet" href="css/main.css">
+
 </head>
 
 <body>
@@ -18,7 +20,15 @@
         <span class="groutHeader">Grout Palette</span>
       </div>
       <div class="settings">Settings</div>
-      <div class="colorSwatch">Color Swatch</div>
+      <div class="colorSwatch">
+        <span class="swatchHeader">Color Swatch</span>
+        <div class="colors"></div>
+        <button class="addButton" title="add a color to the swatch">add</button>
+        <button class="darkenButton" title="darken the last color in the swatch">darker</button>
+        <button class="lightenButton" title="lighten the last color in the swatch">lighter</button>
+        <button class="hueShiftButton" title="hue shift the last color in the swatch">hue shift</button>
+        <button class="subButton" title="remove the last color from the swatch">remove</button>
+      </div>
       <div class="favorites">Favorites</div>
     </aside>
     <main>
@@ -27,6 +37,13 @@
     </main>
   </div>
   <footer>2019 - Simo Savonen</footer>
+
+  <!-- Huebee is a JS color picker library -->
+  <script src="js/lib/huebee.pkgd.min.js"></script>
+
+  <!-- TinyColor is a JS color manipulation library -->
+  <script src="js/lib/tinycolor-min.js"></script>
+
   <script src="js/app.js" type="module"></script>
 </body>
 

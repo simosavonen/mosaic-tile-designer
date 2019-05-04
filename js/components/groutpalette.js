@@ -2,7 +2,6 @@ import { mapeiGrouts } from '../data/MAPEI_Ultracolor.js'
 import { store } from './store.js'
 
 class GroutPalette {
-
   constructor() {
     this.groutDiv = document.querySelector('.groutPalette')
     this.groutHeader = document.querySelector('.groutHeader')
@@ -20,11 +19,16 @@ class GroutPalette {
       })
       this.groutDiv.appendChild(sampleDiv)
     }
+    // fix the floating divs overflowing outside parent div
+    const clearDiv = document.createElement('div')
+    clearDiv.style.clear = 'both'
+    this.groutDiv.appendChild(clearDiv)
   }
 
   update() {
+    const { groutName, groutColor } = store.state
     this.groutHeader.innerHTML = `Grout Palette by MAPEI Ultracolor<br />
-    ${store.state.groutName}: ${store.state.groutColor} `
+    ${groutName}: ${groutColor}`
   }
 }
 

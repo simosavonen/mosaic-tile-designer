@@ -28,8 +28,7 @@ footer {
   border: 1px solid black;
   background: rgba(240, 240, 240, 0.6);
   padding: 10px;
-  margin: 0px 0px 10px 0px;
-  overflow: auto;
+  margin: 0px 0px 10px 0px;    
 }
 
 .groutSample {
@@ -44,10 +43,40 @@ footer {
   border: 3px solid black;
 }
 
-.groutHeader {
+.groutHeader, .swatchHeader {
   display: block;
   margin-bottom: 10px;
 }
+
+.colorSwatch input {
+  width: 100%;
+  padding: 5px 0px 2px 10px;
+  margin: 2px 0;
+  box-sizing: border-box;
+  border: 1px solid black;
+  border-radius: 4px;
+}
+
+.addButton, .darkenButton, .lightenButton, .hueShiftButton {
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.subButton {
+  padding: 5px;
+  border: 1px solid red;
+  background: rgba(255, 0, 0, 0.5);
+  border-radius: 4px;
+  font-size: 13px;
+  float: right;
+}
+
+.colors {
+  margin-bottom: 10px;
+}
+
 
 .mosaic, .texture {
   border: 1px solid black;

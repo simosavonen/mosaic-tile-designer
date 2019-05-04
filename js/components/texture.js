@@ -2,7 +2,7 @@ class Texture {
 
   constructor() {
     this.textureDiv = document.querySelector('.texture')
-    this.canvas = document.querySelector('.mosaic')
+    this.mosaic = document.querySelector('.mosaic')
   }
 
   render() {
@@ -10,10 +10,10 @@ class Texture {
   }
 
   update() {
-    const url = this.canvas.toDataURL()
+    const url = this.mosaic.toDataURL()
     this.textureDiv.style.background = `url(${url}) repeat`
-    this.textureDiv.style.width = `${this.canvas.width * 3}px`
-    this.textureDiv.style.height = `${this.canvas.height * 3}px`
+    this.textureDiv.style.width = `${this.mosaic.width * 3}px`
+    this.textureDiv.style.height = `${this.mosaic.height * 3}px`
   }
 }
 
