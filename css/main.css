@@ -45,7 +45,7 @@ footer {
   border: 3px solid black;
 }
 
-.groutHeader, .swatchHeader, .settingsHeader {
+.groutHeader, .swatchHeader, .settingsHeader, .favoritesHeader {
   display: block;
   margin-bottom: 10px;
 }
@@ -91,4 +91,15 @@ footer {
 .slider {
   width: 170px;
   margin-left: 10px;
+}
+
+.favoriteWrapper {
+  overflow: auto; 
+  margin: 10px 0px 10px 0px; 
+  cursor: pointer;
+}
+
+.favoriteDelete {
+  float: right; 
+  padding: 1px 5px 1px 5px;
 }

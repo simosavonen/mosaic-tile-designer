@@ -48,9 +48,7 @@
             <tr>
               <td>height</td>
               <td id="tileHeight" style="text-align: center;"></td>
-              <td>
-                <input class="slider" name="tileHeight" id="heightSlider" type="range" min="1" max="100" />
-              </td>
+              <td><input class="slider" name="tileHeight" id="heightSlider" type="range" min="1" max="100" /></td>
             </tr>
             <tr>
               <td>glow</td>
@@ -74,7 +72,16 @@
         <button class="hueShiftButton" title="hue shift the last color in the swatch">hue shift</button>
         <button class="subButton" title="remove the last color from the swatch">remove</button>
       </div>
-      <div class="favorites">Favorites</div>
+      <div class="favorites">
+        <span class="favoritesHeader">Favorites</span>
+        <div class="favoritesList"></div>
+        <div>
+          <form id="saveFavorite">
+            <input type="text" placeholder="give the swatch a unique name" id="favoriteName" required style="width: 98%; margin: 5px 0px 5px 0px;">
+            <button type="submit">save current swatch to favorites</button>
+          </form>
+        </div>
+      </div>
     </aside>
     <main>
       <canvas class="mosaic"></canvas>

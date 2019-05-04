@@ -1,6 +1,6 @@
 const defaults = {
-  'groutName': '100 White',
-  'groutColor': '#FFFFFF',
+  'groutName': '114 Anthracite',
+  'groutColor': '#494C53',
   'groutWidth': 4,
   'tileWidth': 20,
   'tileHeight': 20,
@@ -26,7 +26,7 @@ class Store {
     }
 
     if (!this.swatch) {
-      this.swatch = ['#222e50', '#007991', '#439a86', '#bcd8c1', '#e9d985']
+      this.swatch = ['#222E50', '#007991', '#439A86', '#BCD8C1', '#E9D985']
       localStorage.setItem('swatch', JSON.stringify(this.swatch))
     }
 
@@ -39,7 +39,7 @@ class Store {
 
     if (!this.favorites) {
       this.favorites = {
-        "Marine Laboratory": ['#222e50', '#007991', '#439a86', '#bcd8c1', '#e9d985'],
+        "Marine Laboratory": ['#222E50', '#007991', '#439A86', '#BCD8C1', '#E9D985'],
       }
       localStorage.setItem('favorites', JSON.stringify(this.favorites))
     }
@@ -95,15 +95,21 @@ class Store {
     }
   }
 
-  saveToFavorites() {
-    this.favorites.push(this.swatch)
+  saveToFavorites(title) {
+    // remember to copy array values, dont just save a reference to the same array
+    this.favorites[title] = Array.from(this.swatch)
     localStorage.setItem('favorites', JSON.stringify(this.favorites))
   }
 
-  loadFromFavorites(index) {
-    this.swatch = favorites[index]
+  deleteFromFavorites(title) {
+    delete this.favorites[title]
+    localStorage.setItem('favorites', JSON.stringify(this.favorites))
+  }
+
+  loadFromFavorites(title) {
+    this.swatch = Array.from(this.favorites[title])
     localStorage.setItem('swatch', JSON.stringify(this.swatch))
-    this.nofify()
+    this.notify()
   }
 
   setState(key, val, shouldNotify = true) {
