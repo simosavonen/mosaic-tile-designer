@@ -8,6 +8,11 @@ body {
   margin-top: 20px;
 }
 
+header {
+  font-size: 25px;
+  font-weight: bold;
+}
+
 aside {
   width: 300px;
   float: left;  
