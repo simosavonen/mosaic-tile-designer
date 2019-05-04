@@ -4,7 +4,7 @@ body {
 
 .container {
   width: 1200px;
-  overflow: auto;
+  overflow: visible;
   margin-top: 20px;
 }
 
@@ -17,11 +17,12 @@ aside {
 main {
   width: 800px; 
   float: left;
-  overflow: auto;
+  overflow: visible;
 }
 
 footer {
   padding: 10px;
+  clear: both;
 }
 
 .groutPalette, .settings, .colorSwatch, .favorites {
@@ -32,6 +33,7 @@ footer {
 }
 
 .groutSample {
+  cursor: pointer;
   width: 15px;
   height: 30px;
   margin: 1px;
@@ -43,7 +45,7 @@ footer {
   border: 3px solid black;
 }
 
-.groutHeader, .swatchHeader {
+.groutHeader, .swatchHeader, .settingsHeader {
   display: block;
   margin-bottom: 10px;
 }
@@ -80,4 +82,13 @@ footer {
 
 .mosaic, .texture {
   border: 1px solid black;
+}
+
+.mosaic {
+  cursor: pointer;
+}
+
+.slider {
+  width: 170px;
+  margin-left: 10px;
 }

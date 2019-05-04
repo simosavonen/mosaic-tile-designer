@@ -8,6 +8,7 @@ const defaults = {
   'cols': 10,
   'glowEffect': true,
   'patternLock': false,
+  'settingsVisible': true,
 }
 
 class Store {
@@ -37,7 +38,10 @@ class Store {
     }
 
     if (!this.favorites) {
-      this.favorites = []
+      this.favorites = {
+        "Marine Laboratory": ['#222e50', '#007991', '#439a86', '#bcd8c1', '#e9d985'],
+      }
+      localStorage.setItem('favorites', JSON.stringify(this.favorites))
     }
 
   }

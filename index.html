@@ -19,7 +19,52 @@
       <div class="groutPalette">
         <span class="groutHeader">Grout Palette</span>
       </div>
-      <div class="settings">Settings</div>
+      <div class="settings">
+        <span class="settingsHeader">Settings
+          <span id="toggleSettings" style="float: right; cursor:pointer; text-decoration:underline;">hide</a></span>
+        </span>
+        <table id="settingsTable">
+          <tbody>
+            <tr>
+              <td style="width: 50px;">rows</td>
+              <td id="rows" style="width: 45px; text-align: center;"></td>
+              <td><input class="slider" name="rows" id="rowsSlider" type="range" min="1" max="30" /></td>
+            </tr>
+            <tr>
+              <td>cols</td>
+              <td id="cols" style="text-align: center;"></td>
+              <td><input class="slider" name="cols" id="colsSlider" type="range" min="1" max="30" /></td>
+            </tr>
+            <tr>
+              <td>grout</td>
+              <td id="groutWidth" style="text-align: center;"></td>
+              <td><input class="slider" name="groutWidth" id="groutSlider" type="range" min="2" max="20" step="2" /></td>
+            </tr>
+            <tr>
+              <td>width</td>
+              <td id="tileWidth" style="text-align: center;"></td>
+              <td><input class="slider" name="tileWidth" id="widthSlider" type="range" min="1" max="100" /></td>
+            </tr>
+            <tr>
+              <td>height</td>
+              <td id="tileHeight" style="text-align: center;"></td>
+              <td>
+                <input class="slider" name="tileHeight" id="heightSlider" type="range" min="1" max="100" />
+              </td>
+            </tr>
+            <tr>
+              <td>glow</td>
+              <td id="glowStatus" style="text-align: center;">on</td>
+              <td><button id="glowButton">toggle glow</button></td>
+            </tr>
+            <tr>
+              <td>lock</td>
+              <td id="lockStatus" style="text-align: center;">off</td>
+              <td><button id="lockButton">toggle pattern lock</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <div class="colorSwatch">
         <span class="swatchHeader">Color Swatch</span>
         <div class="colors"></div>
