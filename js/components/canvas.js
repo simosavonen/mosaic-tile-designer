@@ -4,6 +4,11 @@ class Canvas {
   constructor() {
     this.mosaic = document.querySelector('.mosaic')
     this.ctx = this.mosaic.getContext('2d')
+
+    this.mosaic.addEventListener('click', (event) => {
+      const clickPos = this.getClickPositionOnMosaic(event)
+      store.swapColor(clickPos)
+    })
   }
 
   render() {
@@ -32,12 +37,16 @@ class Canvas {
         this.ctx.fillRect(tileX, tileY, tileWidth, tileHeight)
       }
     }
-
   }
 
 
-
-
+  getClickPositionOnMosaic(event) {
+    const rect = this.mosaic.getBoundingClientRect()
+    return {
+      x: Math.floor(event.clientX - rect.left),
+      y: Math.floor(event.clientY - rect.top)
+    }
+  }
 
 }
 

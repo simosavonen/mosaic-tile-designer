@@ -55,11 +55,11 @@ class ColorSwatch {
     this.subButton.disabled = false
   }
 
-  tuneSwatch(colorType) {
+  tuneSwatch(action) {
     const base = store.swatch[store.swatch.length - 1]
     let newColor = base
 
-    switch (colorType) {
+    switch (action) {
       case 'darken':
         newColor = tinycolor(base).darken(10).toHexString().toUpperCase()
         break

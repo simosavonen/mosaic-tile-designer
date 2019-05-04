@@ -54,9 +54,15 @@ class Store {
     this.notify()
   }
 
-  swapColor(x, y) {
+  swapColor(clickPos) {
+    const x = Math.floor(clickPos.x / (this.state.tileWidth + this.state.groutWidth))
+    const y = Math.floor(clickPos.y / (this.state.tileHeight + this.state.groutWidth))
     let index = this.matrix[x][y]
-    this.matrix[x][y] = (index < this.swatch.length) ? index++ : 0
+    if (this.matrix[x][y] === this.swatch.length - 1) {
+      this.matrix[x][y] = 0
+    } else {
+      this.matrix[x][y] += 1
+    }
     localStorage.setItem('matrix', JSON.stringify(this.matrix))
     this.notify()
   }
