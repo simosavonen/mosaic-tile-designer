@@ -40,6 +40,7 @@ class Favorites {
 
       wrapper.addEventListener('click', () => {
         store.loadFromFavorites(titles[i])
+        // call update directly, instead of making colorswatch observe the store
         colorSwatch.update()
       })
 

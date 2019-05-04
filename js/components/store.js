@@ -107,9 +107,11 @@ class Store {
   }
 
   loadFromFavorites(title) {
-    this.swatch = Array.from(this.favorites[title])
+    this.swatch = this.favorites[title]
     localStorage.setItem('swatch', JSON.stringify(this.swatch))
-    this.notify()
+    if (!this.state.patternLock) {
+      this.randomizeMatrix()
+    }
   }
 
   setState(key, val, shouldNotify = true) {

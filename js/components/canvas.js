@@ -35,8 +35,25 @@ class Canvas {
         this.ctx.fillStyle = store.swatch[index]
 
         this.ctx.fillRect(tileX, tileY, tileWidth, tileHeight)
+
+        // glow effect
+        if (store.state.glowEffect) {
+          const leftgrd = this.ctx.createLinearGradient(tileX, tileY, tileX + tileWidth / 5, tileY)
+          leftgrd.addColorStop(0, 'rgba(255, 255, 255, 0.2)')
+          leftgrd.addColorStop(1, 'rgba(255, 255, 255, 0)')
+          this.ctx.fillStyle = leftgrd
+          this.ctx.fillRect(tileX, tileY, tileWidth / 5, tileHeight)
+
+          const topgrd = this.ctx.createLinearGradient(tileX, tileY, tileX, tileY + tileHeight / 5)
+          topgrd.addColorStop(0, 'rgba(255, 255, 255, 0.2)')
+          topgrd.addColorStop(1, 'rgba(255, 255, 255, 0)')
+          this.ctx.fillStyle = topgrd
+          this.ctx.fillRect(tileX, tileY, tileWidth, tileHeight / 5)
+        }
       }
     }
+
+
   }
 
 
