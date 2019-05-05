@@ -33,7 +33,7 @@ The app separates a model in file **store.js** which handles the state. Every da
 Each section of the website is implemented by a _component.js_ file, some of which register as _observers_ for the model component, store.js. When the application state is changed, store.js tells the observers to update their views. The one exception to this is a direct link between favorites.js and colorswatch.js, where when loading a saved color swatch, favorites.js calls colorSwatch.update(). This is to avoid updating colorSwatch panel at every minor state change update. 
 
 
-![UML diagram](/img/MosaicTileDesignerUML.svg)
+![UML diagram](img/MosaicTileDesignerUML.svg)
 
 
 - Branch **master** contains an early proof-of-concept single file spaghetti version.
