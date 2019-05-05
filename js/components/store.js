@@ -21,7 +21,7 @@ class Store {
     this.observers = []
 
     if (!this.state) {
-      this.state = defaults
+      this.state = Object.assign({}, defaults)
       localStorage.setItem('state', JSON.stringify(this.state))
     }
 
@@ -58,10 +58,10 @@ class Store {
     this.notify()
   }
 
+  // cycles through the available colors in the swatch for the single tile
   swapColor(clickPos) {
     const x = Math.floor(clickPos.x / (this.state.tileWidth + this.state.groutWidth))
     const y = Math.floor(clickPos.y / (this.state.tileHeight + this.state.groutWidth))
-    let index = this.matrix[x][y]
     if (this.matrix[x][y] === this.swatch.length - 1) {
       this.matrix[x][y] = 0
     } else {
@@ -96,7 +96,7 @@ class Store {
   }
 
   saveToFavorites(title) {
-    // remember to copy array values, dont just save a reference to the same array
+    // remember to copy array values, dont just save a reference to the array
     this.favorites[title] = [...this.swatch]
     localStorage.setItem('favorites', JSON.stringify(this.favorites))
   }
@@ -107,6 +107,7 @@ class Store {
   }
 
   loadFromFavorites(title) {
+    // same thing here, dont use reference, copy values instead
     this.swatch = [...this.favorites[title]]
     localStorage.setItem('swatch', JSON.stringify(this.swatch))
     if (!this.state.patternLock) {

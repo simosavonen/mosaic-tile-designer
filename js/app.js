@@ -1,5 +1,6 @@
 'use strict'
 
+// these imports create singleton instances
 import { groutPalette } from './components/groutpalette.js'
 import { settings } from './components/settings.js'
 import { colorSwatch } from './components/colorswatch.js'

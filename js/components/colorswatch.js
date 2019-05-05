@@ -22,6 +22,9 @@ class ColorSwatch {
   }
 
   update() {
+    // empty the container and repopulate
+    // Heavy operation that caused sluggish performance if called
+    // on every store.notify(). 
     while (this.colorsDiv.firstChild) {
       this.colorsDiv.removeChild(this.colorsDiv.firstChild)
     }

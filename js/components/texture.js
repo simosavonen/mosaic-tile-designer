@@ -9,6 +9,8 @@ class Texture {
     this.update()
   }
 
+  // trust that the mosaic was updated before this.update was called
+  // possible solution would be to load the image with a delay
   update() {
     const url = this.mosaic.toDataURL()
     this.textureDiv.style.background = `url(${url}) repeat`
