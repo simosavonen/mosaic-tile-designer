@@ -97,7 +97,7 @@ class Store {
 
   saveToFavorites(title) {
     // remember to copy array values, dont just save a reference to the same array
-    this.favorites[title] = Array.from(this.swatch)
+    this.favorites[title] = [...this.swatch]
     localStorage.setItem('favorites', JSON.stringify(this.favorites))
   }
 
@@ -107,7 +107,7 @@ class Store {
   }
 
   loadFromFavorites(title) {
-    this.swatch = this.favorites[title]
+    this.swatch = [...this.favorites[title]]
     localStorage.setItem('swatch', JSON.stringify(this.swatch))
     if (!this.state.patternLock) {
       this.randomizeMatrix()
