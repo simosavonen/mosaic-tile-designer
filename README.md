@@ -6,7 +6,7 @@ Design mosaic tile textures for use in 3D modeling software. The app lets you ed
 
 To save a texture.png file, right click the smaller mosaic grid canvas and choose 'Save Image As...'
 
-A demo is running at http://substantial-yoke.surge.sh
+A demo is running at http://mosaic-tile-designer.surge.sh
 
 ## Design principle
 Chose to use only vanilla Javascript, to see the difference to popular frameworks like React. The first version ended up being a long single app.js file which some might call spaghetti code.
@@ -47,7 +47,7 @@ The application uses two JS libraries
 
 Clone the **modular** branch or download it as .zip file. 
 
-A demo is running at http://substantial-yoke.surge.sh
+A demo is running at http://mosaic-tile-designer.surge.sh
 
 Confirmed to work on Chrome, Firefox and Edge.
 
