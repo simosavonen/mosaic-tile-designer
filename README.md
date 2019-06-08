@@ -32,7 +32,7 @@ The app separates a model in file **store.js** which handles the state. Every da
 
 Each section of the website is implemented by a _component.js_ file, some of which register as _observers_ for the model component, store.js. When the application state is changed, store.js tells the observers to update their views. The one exception to this is a direct link between favorites.js and colorswatch.js, where when loading a saved color swatch, favorites.js calls colorSwatch.update(). This is to avoid updating colorSwatch panel at every minor state change update. 
 
-![UML diagram](https://gitlab.utu.fi/sipesa/mosaic-tile-designer/raw/modular/img/UMLdiagram.png)
+![UML diagram](https://github.com/simosavonen/mosaic-tile-designer/blob/modular/img/UMLdiagram.png)
 
 The components responsible for a GUI panel implement a method `render()` where code to draw the initial view should go. However, some components redraw themselves fully when `update()` is called. Such components ended up with a simple `render() { this.update() }` implementation.
 
@@ -58,13 +58,13 @@ To save the texture as a PNG file, right click on the mosaic and choose 'Save Im
 
 The app most likely requires a mouse to use, apologies to tablet users.
 
-![Mosaic Grid](https://gitlab.utu.fi/sipesa/mosaic-tile-designer/raw/modular/img/canvas.png)
+![Mosaic Grid](https://github.com/simosavonen/mosaic-tile-designer/blob/modular/img/canvas.png)
 
 #### Grout Palette
 The different colored sample tiles are clickable. The header text shows the current active grout color.
 The palette contains colors sold in Finnish hardware stores under the brand _MAPEI Ultracolor (plus)_.
 
-![Grout Palette](https://gitlab.utu.fi/sipesa/mosaic-tile-designer/raw/modular/img/groutPalette.png)
+![Grout Palette](https://github.com/simosavonen/mosaic-tile-designer/blob/modular/img/groutPalette.png)
 
 #### Settings panel
 This panel can be hidden so it doesn't take screen space.
@@ -75,7 +75,7 @@ The **toggle glow** button adds a very slight glow effect on each tile's upper a
 
 Normally the grid pattern is overwritten if you add or remove colors from the swatch. Users might want to **lock the pattern** if they have spent time creating it. When locked, it's safe to work on the color swatch. To make new colors appear in the mosaic, click at individual tiles until the new color shows up.
 
-![Settings panel](https://gitlab.utu.fi/sipesa/mosaic-tile-designer/raw/modular/img/settings.png)
+![Settings panel](https://github.com/simosavonen/mosaic-tile-designer/blob/modular/img/settings.png)
 
 #### Color Swatch
 The colors shown in the swatch are input fields, clicking at one opens a color picker. It's possible to also type in a color value directly, just make sure it's properly formatted HEX code: #FFFFFF
@@ -86,11 +86,11 @@ To gradually darken or lighten the last color, click the buttons. Hue shift keep
 
 Tip: start with a swatch with just 1 color. Add colors and darken or lighten the newly added. It makes it easy to create a pleasing gradient style mosaic.
 
-![Color Swatch](https://gitlab.utu.fi/sipesa/mosaic-tile-designer/raw/modular/img/colorSwatch.png)
+![Color Swatch](https://github.com/simosavonen/mosaic-tile-designer/blob/modular/img/colorSwatch.png)
 
 #### Favorites
 Clicking at the saved swatch in favorites will overwrite the current active swatch, with no warning or confirmation dialog. 
 
 To save a swatch in favorites, give it a name and click save. It will be saved into the browser localstorage. Please use unique names, or the sun might go supernova.
 
-![Favorites](https://gitlab.utu.fi/sipesa/mosaic-tile-designer/raw/modular/img/favorites.png)
+![Favorites](https://github.com/simosavonen/mosaic-tile-designer/blob/modular/img/favorites.png)
